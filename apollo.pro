@@ -9,4 +9,4 @@ CONFIG(debug, debug|release) {
     TARGET = apollo
 }
 
-SOURCES += source/apollo.cpp
+include(src/src.pri)
