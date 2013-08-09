@@ -9,8 +9,10 @@ distracting bells and whistles, and conversations should be at the fore-front;
 show inline image previews and URL summaries rather than forcing the user to
 click them, and group contiguous messages from a single user into a tidy block.
 UI affordances should be subtle, but useful; stop bombarding the user's eyes
-brain with repetitive or redundant information.  Hotkeys and configuration files
-should trump buttons and dialogs.
+brain with repetitive or redundant information.  Hotkeys and human-readable
+configuration files should trump buttons and dialogs.
+
+Inspiration is being taken from Irssi, HipChat, Limechat, and Textual.
 
 apollo will be considered a success when the user can hide everything but the
 conversations themselves without losing any information.
@@ -34,3 +36,4 @@ legal
 apollo is copyright (c) 2013 John Reese
 apollo is licensed under the MIT license.  See LICENSE for details.
 
+[libcommuni]: http://communi.github.io/
