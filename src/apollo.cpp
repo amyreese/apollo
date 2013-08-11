@@ -1,11 +1,25 @@
+// Copyright (c) 2013 John Reese
+// Licensed under the MIT license
+
+#include <stdio.h>
+#include <QtCore>
 #include <QApplication>
 #include <QMainWindow>
+#include <QJsonDocument>
+#include "config.h"
 
 int main(int argc, char* argv[])
 {
-    QApplication apollo(argc, argv);
-    QMainWindow window;
-    window.show();
+    try {
+        Config config("prefs.json");
 
-    return apollo.exec();
+        QApplication apollo(argc, argv);
+        QMainWindow window;
+        window.show();
+
+        return apollo.exec();
+
+    } catch(int e) {
+        return 1;
+    }
 }

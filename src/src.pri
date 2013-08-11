@@ -1,6 +1,9 @@
 DEPENDPATH += $$PWD
 INCLUDEPATH += $$PWD
 
+HEADERS += $$PWD/config.h
+
+SOURCES += $$PWD/config.cpp
 SOURCES += $$PWD/apollo.cpp
 
 exists(libcommuni/src/src.pri) {
