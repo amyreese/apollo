@@ -1,9 +1,11 @@
 language: cpp
 compiler:
     - gcc
-    - clang
 before_install:
     - git submodule update --init --recursive
+    - sudo add-apt-repository ppa:ubuntu-sdk-team/ppa
+    - sudo apt-get update -qq
+    - sudo apt-get install -qq qtbase-opensource-src qtwebkit-opensource-src
 script:
     - qmake -v
     - qmake
