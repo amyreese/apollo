@@ -12,6 +12,7 @@ from PySide.QtWebKit import QWebView
 # global reference to
 app = None
 
+
 class SpacedockApp(QApplication):
 
     def __init__(self, argv):
