@@ -6,11 +6,15 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
+import webbrowser
+
 from argparse import ArgumentParser
 from os import path
 
-from PySide.QtCore import Slot, QUrl
-from PySide.QtGui import QApplication
+from PySide.QtCore import Qt, Slot, QUrl, QSettings
+from PySide.QtGui import (QApplication, QWidget, QLabel, QMenuBar, QStatusBar,
+                          QHBoxLayout, QVBoxLayout, QMessageBox, QDialog,
+                          QPushButton, QAction)
 from PySide.QtWebKit import QWebView, QWebSettings
 
 from spacedock import VERSION
@@ -33,16 +37,121 @@ class SpacedockApp(QApplication):
 
         self.root = path.realpath(path.dirname(__file__))
 
+    @Slot(str)
+    def open_url(self, url):
+        webbrowser.open(url)
+
     @Slot(str, result=str)
     def foo(self, word):
         self.log.debug(word)
         return 'foo'
 
 
-class SpacedockWebView(QWebView):
+class SpacedockWindow(QWidget):
 
     def __init__(self):
-        QWebView.__init__(self)
+        QWidget.__init__(self)
+
+        self.settings = QSettings('noswap.com', 'spacedock')
+
+        self.setWindowTitle('Spacedock')
+        self.setMinimumSize(800, 600)
+        self.restoreGeometry(self.settings.value('geometry'))
+
+        self.init_menu()
+        self.init_status()
+        self.init_layout()
+
+    def init_menu(self):
+        self.menubar = QMenuBar(self)
+        filemenu = self.menubar.addMenu('&File')
+        helpmenu = self.menubar.addMenu('&Help')
+
+        quit = QAction('&Quit', self)
+        quit.setShortcut(Qt.Modifier.CTRL + Qt.Key_Q)
+        quit.triggered.connect(self.close)
+        filemenu.addAction(quit)
+
+        about = QAction('&About', self)
+        about.triggered.connect(self.about)
+        helpmenu.addAction(about)
+
+        about = QAction('About &Qt', self)
+        about.triggered.connect(self.about_qt)
+        helpmenu.addAction(about)
+
+    def init_status(self):
+        self.statusbar = QStatusBar(self)
+        self.statusbar.showMessage('Spacedock ready.')
+
+    def init_layout(self):
+        layout = QVBoxLayout()
+        layout.setContentsMargins(0, 0, 0, 0)
+        layout.setSpacing(0)
+
+        layout.setMenuBar(self.menubar)
+
+        self.webview = SpacedockWebView(self)
+        self.webview.loadFile('index.html')
+        layout.addWidget(self.webview, 1)
+
+        layout.addWidget(QPushButton("Hello"), 0)
+        layout.addWidget(self.statusbar, 0)
+
+        self.setLayout(layout)
+
+    @Slot()
+    def about(self):
+        dialog = SpacedockAbout(self)
+        dialog.show()
+
+    @Slot()
+    def about_qt(self):
+        QMessageBox.aboutQt(self)
+
+    @Slot()
+    def close(self):
+        self.settings.setValue('geometry', self.saveGeometry())
+        #self.settings.setValue('windowState', self.saveState())
+        QWidget.close(self)
+
+
+class SpacedockAbout(QDialog):
+    '''\
+Spacedock is Copyright 2014 John Reese,<br/>
+and is licensed under the MIT license.<br/><br/>
+
+See <a href="http://github.com/jreese/spacedock">
+http://github.com/jreese/spacedock</a><br/>
+for further details.'''
+
+    def __init__(self, parent):
+        QDialog.__init__(self, parent, 0)
+
+        self.setModal(True)
+        self.setMaximumWidth(400)
+
+        layout = QHBoxLayout()
+        sublayout = QVBoxLayout()
+
+        label = QLabel()
+        label.setTextFormat(Qt.RichText)
+        label.setText(self.__doc__)
+        label.linkActivated.connect(app.open_url)
+        sublayout.addWidget(label)
+
+        button = QPushButton('Ok')
+        button.clicked.connect(self.accept)
+        sublayout.addWidget(button)
+
+        layout.addLayout(sublayout)
+        self.setLayout(layout)
+
+
+class SpacedockWebView(QWebView):
+
+    def __init__(self, parent=None):
+        QWebView.__init__(self, parent)
 
         settings = {
             QWebSettings.WebAttribute.JavaEnabled: False,
@@ -90,12 +199,8 @@ def main(argv):
         enable_debug()
 
     log.debug('starting application')
+
     app = SpacedockApp(options, argv)
-
-    webview = SpacedockWebView()
-
-    webview.loadFile('index.html')
-    webview.show()
-    # setup gui here
-
+    window = SpacedockWindow()
+    window.show()
     app.exec_()
