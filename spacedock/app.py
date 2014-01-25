@@ -47,13 +47,16 @@ class SpacedockWebView(QWebView):
         settings = {
             QWebSettings.WebAttribute.JavaEnabled: False,
             QWebSettings.WebAttribute.PluginsEnabled: False,
-            QWebSettings.WebAttribute.DeveloperExtrasEnabled: True,
         }
+
+        if app.options.debug:
+            settings[QWebSettings.WebAttribute.DeveloperExtrasEnabled] = True
+
         for key, value in settings.items():
             self.settings().setAttribute(key, value)
 
-        frame = self.page().mainFrame()
-        frame.javaScriptWindowObjectCleared.connect(self.setupDOM)
+        self.frame = self.page().mainFrame()
+        self.frame.javaScriptWindowObjectCleared.connect(self.setupDOM)
 
     def loadFile(self, filename):
         if not path.isabs(filename):
