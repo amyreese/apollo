@@ -28,7 +28,7 @@ def main(argv):
     app = SpacedockApp(argv)
 
     webview = QWebView()
-    webview.load("http://noswap.com")
+    webview.load("http://kerbalspaceport.com")
     webview.show()
     # setup gui here
 
