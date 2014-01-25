@@ -6,12 +6,14 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
+from argparse import ArgumentParser
 from os import path
 
 from PySide.QtCore import Slot, QUrl
 from PySide.QtGui import QApplication
 from PySide.QtWebKit import QWebView, QWebSettings
 
+from spacedock import VERSION
 from .log import logger, enable_debug
 
 # global reference to
@@ -22,15 +24,15 @@ class SpacedockApp(QApplication):
 
     log = None
 
-    def __init__(self, argv):
+    def __init__(self, options, argv):
         QApplication.__init__(self, argv)
 
-        SpacedockApp.log = logger()
-        enable_debug()
+        self.log = logger('spacedock')
+        self.options = options
 
     @Slot(str, result=str)
     def foo(self, word):
-        print(word)
+        self.log.debug(word)
         return 'foo'
 
 
@@ -57,12 +59,24 @@ class SpacedockWebView(QWebView):
 
 def main(argv):
     '''Main entry point for the Spacedock application.'''
-    global app, log
+    global app
+    assert(app is None)
 
-    if app is not None:
-        raise Exception('spacedock.app is already set')
+    log = logger()
 
-    app = SpacedockApp(argv)
+    parser = ArgumentParser(prog='spacedock', description='KSP mod manager')
+    parser.add_argument('-d', '--debug', action='store_true', default=False,
+                        help='enable debug output')
+    parser.add_argument('-V', '--version', action='version',
+                        version='%(prog)s ' + VERSION)
+
+    options = parser.parse_args()
+
+    if options.debug:
+        enable_debug()
+
+    log.debug('starting application')
+    app = SpacedockApp(options, argv)
 
     webview = SpacedockWebView()
 
