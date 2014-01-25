@@ -23,12 +23,15 @@ app = None
 class SpacedockApp(QApplication):
 
     log = None
+    root = None
 
     def __init__(self, options, argv):
         QApplication.__init__(self, argv)
 
         self.log = logger('spacedock')
         self.options = options
+
+        self.root = path.realpath(path.dirname(__file__))
 
     @Slot(str, result=str)
     def foo(self, word):
@@ -51,6 +54,14 @@ class SpacedockWebView(QWebView):
 
         frame = self.page().mainFrame()
         frame.javaScriptWindowObjectCleared.connect(self.setupDOM)
+
+    def loadFile(self, filename):
+        if not path.isabs(filename):
+            filename = path.join(app.root, 'html', filename)
+
+        app.log.debug('loading local file %s', filename)
+        url = QUrl.fromLocalFile(filename)
+        self.load(url)
 
     def setupDOM(self):
         app.log.debug('setupDOM()')
@@ -80,7 +91,7 @@ def main(argv):
 
     webview = SpacedockWebView()
 
-    webview.load(QUrl.fromLocalFile(path.abspath('html/index.html')))
+    webview.loadFile('index.html')
     webview.show()
     # setup gui here
 

@@ -25,5 +25,6 @@ setup(name='Spacedock',
                    ],
       license='MIT License',
       packages=['spacedock'],
+      package_data={'spacedock': ['html/*']},
       scripts=['bin/spacedock'],
       )
