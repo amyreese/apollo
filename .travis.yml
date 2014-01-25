@@ -5,7 +5,7 @@ python:
 install:
     - "pip install flake8 --use-mirrors"
 script:
-    - "pip install . --no-deps"
+    - "pip install ."
     - "make lint"
 notifications:
     email: false
