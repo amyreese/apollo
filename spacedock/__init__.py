@@ -10,4 +10,5 @@ from __future__ import unicode_literals
 
 VERSION = '0.1'
 
+from spacedock.log import logger
 from spacedock.app import app, main
