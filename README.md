@@ -1,6 +1,8 @@
 spacedock
 =========
 
+<img src="https://github.com/jreese/spacedock/raw/master/spacedock/images/logobig.png"/>
+
 KSP mod manager and launcher
 
 
