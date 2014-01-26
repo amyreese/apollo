@@ -35,7 +35,13 @@ class SpacedockApp(QApplication):
         self.log = logger('spacedock')
         self.options = options
 
-        self.root = path.realpath(path.dirname(__file__))
+        self.log.debug('__file__: %s', __file__)
+        if path.exists(__file__):
+            self.root = path.realpath(path.dirname(__file__))
+        else:
+            # we're running from a bundle
+            self.root = path.realpath(path.dirname(path.dirname(__file__)))
+        self.log.debug('running from %s', self.root)
 
     @Slot(str)
     def open_url(self, url):
