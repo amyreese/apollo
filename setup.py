@@ -8,7 +8,7 @@ import spacedock
 if path.isfile('README.md'):
     shutil.copyfile('README.md', 'README')
 
-setup(name='Spacedock',
+setup(name='spacedock',
       description='Mod manager for Kerbal Space Program',
       version=spacedock.VERSION,
       author='John Reese',
@@ -24,6 +24,8 @@ setup(name='Spacedock',
                    'Development Status :: 3 - Alpha',
                    ],
       license='MIT License',
+      requires=['pyside (>=2.1)',
+               ],
       packages=['spacedock'],
       package_data={'spacedock': ['html/*']},
       scripts=['bin/spacedock'],
