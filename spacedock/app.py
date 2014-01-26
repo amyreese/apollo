@@ -135,8 +135,8 @@ class SpacedockWindow(QWidget):
 class SpacedockAbout(QDialog):
     '''\
 Spacedock v{0}<br/>
-Python v{1}<br/>
-Qt v{2}<br/>
+Python {1}<br/>
+Qt {2}<br/>
 <br/>
 <a href="http://github.com/jreese/spacedock">
 http://github.com/jreese/spacedock</a><br/>
