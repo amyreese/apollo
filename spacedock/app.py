@@ -6,11 +6,13 @@ from __future__ import division
 from __future__ import print_function
 from __future__ import unicode_literals
 
+import platform
 import webbrowser
 
 from argparse import ArgumentParser
 from os import path
 
+from PySide import QtCore
 from PySide.QtCore import Qt, Slot, QUrl, QSettings
 from PySide.QtGui import (QApplication, QWidget, QLabel, QMenuBar, QStatusBar,
                           QHBoxLayout, QVBoxLayout, QMessageBox, QDialog,
@@ -125,11 +127,19 @@ class SpacedockWindow(QWidget):
 class SpacedockAbout(QDialog):
     '''\
 Spacedock is Copyright 2014 John Reese,<br/>
-and is licensed under the MIT license.<br/><br/>
-
+and is licensed under the MIT license.<br/>
+<br/>
 See <a href="http://github.com/jreese/spacedock">
 http://github.com/jreese/spacedock</a><br/>
-for further details.'''
+for further details.<br/>
+<br/>
+<strong>Build information:</strong>
+<ul>
+<li>Spacedock v{0}</li>
+<li>Python v{1}</li>
+<li>Qt v{2}</li>
+</ul>
+'''
 
     def __init__(self, parent):
         QDialog.__init__(self, parent, 0)
@@ -140,9 +150,13 @@ for further details.'''
         layout = QHBoxLayout()
         sublayout = QVBoxLayout()
 
+        about_text = self.__doc__.format(VERSION,
+                                         platform.python_version(),
+                                         QtCore.__version__)
+
         label = QLabel()
         label.setTextFormat(Qt.RichText)
-        label.setText(self.__doc__)
+        label.setText(about_text)
         label.linkActivated.connect(app.open_url)
         sublayout.addWidget(label)
 
