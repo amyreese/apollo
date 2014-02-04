@@ -10,7 +10,7 @@ upload:
 lint:
 	flake8 --max-complexity 10 --show-source spacedock
 
-bundle: clean
+bundle:
 	pyinstaller spacedock.spec
 
 clean:
