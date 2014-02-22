@@ -18,22 +18,15 @@ apollo will be considered a success when the user can hide everything but the
 conversations themselves without losing any information.
 
 
-details
--------
-
-apollo is built on Qt 5.1 and [libcommuni][].
-
-To build apollo:
-
-    $ qmake && make
-
 [![Build Status](https://travis-ci.org/jreese/apollo.png)](https://travis-ci.org/jreese/apollo)
 
 
 legal
 -----
 
-apollo is copyright (c) 2013 John Reese
-apollo is licensed under the MIT license.  See LICENSE for details.
+apollo is copyright 2014 John Reese, and licensed under the MIT license.  See LICENSE for details.
 
-[libcommuni]: http://communi.github.io/
+apollo uses the following open source projects:
+
+- [Qt Project](http://qt-project.org)
+- [PySide](http://qt-project.org/wiki/Category:LanguageBindings::PySide)
