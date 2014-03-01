@@ -152,7 +152,6 @@ class ApolloWindow(QWidget):
         self.statusbar.showMessage(message)
 
 
-
 class ApolloAbout(QDialog):
     '''\
 apollo v{0}<br/>

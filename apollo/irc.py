@@ -7,9 +7,10 @@ from __future__ import print_function
 from __future__ import unicode_literals
 
 from irc.client import IRC
-from PySide.QtCore import QThread, Signal, Slot
+from PySide.QtCore import QThread, Signal
 
-from .log import logger, enable_debug
+from .log import logger
+
 
 class ServerConnection(QThread):
     event = Signal(str)
