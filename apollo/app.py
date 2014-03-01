@@ -21,6 +21,7 @@ from PySide.QtWebKit import QWebView, QWebSettings
 
 from apollo import VERSION
 from .log import logger, enable_debug
+from .irc import ServerConnection
 
 # global reference to
 app = None
@@ -63,6 +64,7 @@ class ApolloWindow(QWidget):
     def __init__(self):
         QWidget.__init__(self)
 
+        self.conn = None
         self.settings = QSettings('noswap.com', 'apollo')
 
         self.setWindowTitle('apollo')
@@ -109,6 +111,7 @@ class ApolloWindow(QWidget):
         button = QPushButton("Hello")
         button.setSizePolicy(QtGui.QSizePolicy.Maximum,
                              QtGui.QSizePolicy.Maximum)
+        button.clicked.connect(self.connect)
         layout.addWidget(button, 0)
         layout.setAlignment(button, Qt.AlignHCenter)
 
@@ -129,7 +132,25 @@ class ApolloWindow(QWidget):
     def close(self):
         self.settings.setValue('geometry', self.saveGeometry())
         #self.settings.setValue('windowState', self.saveState())
+        if self.conn:
+            self.conn.quit()
+            self.conn.wait()
         QWidget.close(self)
+
+    @Slot()
+    def connect(self):
+        if not self.conn:
+            self.conn = ServerConnection()
+            self.conn.event.connect(self.status_update)
+            self.conn.start()
+            self.statusbar.showMessage('ready...')
+        else:
+            self.conn.connect_irc()
+
+    @Slot()
+    def status_update(self, message):
+        self.statusbar.showMessage(message)
+
 
 
 class ApolloAbout(QDialog):
