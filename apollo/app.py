@@ -19,9 +19,10 @@ from PySide.QtGui import (QApplication, QWidget, QLabel, QMenuBar, QStatusBar,
                           QPushButton, QAction)
 from PySide.QtWebKit import QWebView, QWebSettings
 
-from apollo import VERSION
+from apollo import VERSION, ROOT
 from .log import logger, enable_debug
-from .irc import ServerConnection
+from .irc import NetworkManager, Event
+from .config import Config
 
 # global reference to
 app = None
@@ -38,15 +39,7 @@ class ApolloApp(QApplication):
         self.log = logger('apollo')
         self.options = options
 
-        self.log.debug('__file__: %s', __file__)
-        if path.exists(__file__):
-            self.root = path.realpath(path.dirname(__file__))
-        else:
-            # we're running from a bundle
-            self.root = path.realpath(path.dirname(path.dirname(__file__)))
-        self.log.debug('running from %s', self.root)
-
-        icon = QtGui.QIcon(path.join(self.root, 'images/logomed.png'))
+        icon = QtGui.QIcon(path.join(ROOT, 'images/logomed.png'))
         self.setWindowIcon(icon)
 
     @Slot(str)
@@ -64,7 +57,8 @@ class ApolloWindow(QWidget):
     def __init__(self):
         QWidget.__init__(self)
 
-        self.conn = None
+        self.irc = None
+        self.network = None
         self.settings = QSettings('noswap.com', 'apollo')
 
         self.setWindowTitle('apollo')
@@ -132,24 +126,26 @@ class ApolloWindow(QWidget):
     def close(self):
         self.settings.setValue('geometry', self.saveGeometry())
         #self.settings.setValue('windowState', self.saveState())
-        if self.conn:
-            self.conn.quit()
-            self.conn.wait()
+        if self.irc:
+            self.irc.stop()
+            self.irc.wait(3000)
         QWidget.close(self)
 
     @Slot()
     def connect(self):
-        if not self.conn:
-            self.conn = ServerConnection()
-            self.conn.event.connect(self.status_update)
-            self.conn.start()
+        config = Config()
+        if not self.irc:
+            self.irc = NetworkManager()
+            self.irc.start()
             self.statusbar.showMessage('ready...')
-        else:
-            self.conn.connect_irc()
+        elif not self.network:
+            config = Config().networks._defaults
+            self.network = self.irc.add(config, connect=True)
+            #self.network.event.connect(self.status_update)
 
-    @Slot()
-    def status_update(self, message):
-        self.statusbar.showMessage(message)
+    @Slot(Event)
+    def status_update(self, event):
+        self.statusbar.showMessage(event.type)
 
 
 class ApolloAbout(QDialog):
@@ -178,7 +174,7 @@ Licensed under the MIT license.<br/>
         sublayout = QVBoxLayout()
         btnlayout = QHBoxLayout()
 
-        image = QtGui.QPixmap(path.join(app.root, 'images/logobig.png'))
+        image = QtGui.QPixmap(path.join(ROOT, 'images/logobig.png'))
         label = QLabel()
         label.setPixmap(image)
         label.setSizePolicy(QtGui.QSizePolicy.Maximum,
@@ -229,7 +225,7 @@ class ApolloWebView(QWebView):
 
     def loadFile(self, filename):
         if not path.isabs(filename):
-            filename = path.join(app.root, 'html', filename)
+            filename = path.join(ROOT, 'html', filename)
 
         app.log.debug('loading local file %s', filename)
         url = QUrl.fromLocalFile(filename)

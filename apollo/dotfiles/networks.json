@@ -1,0 +1,18 @@
+{
+	"_defaults": {
+		"url": "irc.freenode.net",
+		"port": 6667,
+		"ssl": false,
+		"nick": "%nick%",
+		"nick1": "%nick1%",
+		"nick2": "%nick2%",
+	},
+	"freenode": {
+		"url": "irc.freenode.net",
+		"port": 6697,
+		"ssl": true,
+		"nick": "%nick%",
+		"nick1": "%nick1%",
+		"nick2": "%nick2%",
+	}
+}

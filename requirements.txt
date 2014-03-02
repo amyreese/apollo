@@ -1,3 +1,4 @@
 flake8>=2.0
 PySide>=1.2.1
 irc=8.5.4
+six

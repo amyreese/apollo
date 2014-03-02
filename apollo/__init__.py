@@ -10,5 +10,6 @@ from __future__ import unicode_literals
 
 VERSION = '0.1'
 
-from apollo.log import logger
-from apollo.app import app, main
+from .platform import ROOT, HOME
+from .log import logger
+from .app import app, main

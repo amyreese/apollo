@@ -1,0 +1,18 @@
+{
+	"nick": "apollo",
+	"nick1": "%nick%_",
+	"nick2": "%nick%__",
+	"networks": {
+		"_defaults": {
+			"name": "freenode",
+			"nick": "%nick%",
+			"nick1": "%nick1%",
+			"nick2": "%nick2%",
+			"url": "irc.freenode.net",
+			"port": 6697,
+			"ssl": true,
+			"password": ""
+		}
+	},
+	"zzz": "goodnight"
+}

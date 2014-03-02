@@ -8,7 +8,7 @@ upload:
 	python setup.py sdist upload
 
 lint:
-	flake8 --max-complexity 10 --show-source apollo
+	flake8 --max-complexity 14 --show-source apollo
 
 bundle:
 	pyinstaller apollo.spec
