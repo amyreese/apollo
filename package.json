@@ -1,0 +1,21 @@
+{
+    "name": "apollo",
+    "version": "0.1",
+    "description": "elegant IRC client",
+    "author": "John Reese <john@noswap.com>",
+    "keywords": [
+        "irc"
+    ],
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/jreese/apollo.git",
+    },
+    "bugs": {
+        "url": "https://github.com/jreese/apollo/issues",
+    },
+    "main": "src/main.js",
+    "scripts": {
+        "test": "echo untestable"
+    }
+}

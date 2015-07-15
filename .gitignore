@@ -13,3 +13,6 @@ coverage
 
 build/Release
 node_modules
+
+electron
+electron.app
