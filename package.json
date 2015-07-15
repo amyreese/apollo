@@ -2,18 +2,18 @@
     "name": "apollo",
     "version": "0.1",
     "description": "elegant IRC client",
-    "author": "John Reese <john@noswap.com>",
+    "author": {
+        "name": "John Reese",
+        "email": "john@noswap.com",
+        "url": "https://noswap.com"
+    },
+    "homepage": "https://github.com/jreese/apollo",
     "keywords": [
         "irc"
     ],
     "license": "MIT",
-    "repository": {
-        "type": "git",
-        "url": "https://github.com/jreese/apollo.git",
-    },
-    "bugs": {
-        "url": "https://github.com/jreese/apollo/issues",
-    },
+    "repository": "jreese/apollo",
+    "bugs": "https://github.com/jreese/apollo/issues",
     "main": "src/main.js",
     "scripts": {
         "test": "echo untestable"
