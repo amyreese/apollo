@@ -36,7 +36,10 @@ exports.application_menu = function(window) {
     }
 
     if (process.platform == 'darwin') {
-        file.submenu.push(about)
+        file.submenu.unshift({
+            type: "separator"
+        })
+        file.submenu.unshift(about)
     } else {
         help.submenu.push(about)
     }
