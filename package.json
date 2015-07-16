@@ -15,6 +15,9 @@
     "repository": "jreese/apollo",
     "bugs": "https://github.com/jreese/apollo/issues",
     "main": "src/main.js",
+    "bin": {
+        "apollo": "bin/apollo.js"
+    },
     "scripts": {
         "test": "echo untestable"
     },

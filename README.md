@@ -21,8 +21,20 @@ conversations themselves without losing any information.
 [![Build Status](https://travis-ci.org/jreese/apollo.png)](https://travis-ci.org/jreese/apollo)
 
 
+build
+-----
+
+To build and install from a checkout or snapshot:
+
+    $ npm install -g
+
+To run the installed package:
+
+    $ apollo
+
+
+
 legal
 -----
 
 apollo is copyright 2015 John Reese, and licensed under the MIT license.  See LICENSE for details.
-
