@@ -1,6 +1,8 @@
 var app = require('app')
+var console = require('console');
 var dialog = require('dialog')
-var Menu = require('menu');
+var menu = require('menu');
+var shell = require('shell');
 var BrowserWindow = require('browser-window')
 var globalShortcut = require('global-shortcut')
 
@@ -19,7 +21,14 @@ app.on('ready', function() {
         mainWindow = null
     })
 
-    Menu.setApplicationMenu(gui.application_menu(mainWindow))
+    mainWindow.webContents.on('will-navigate', function(event, url) {
+            console.log('navigate to ' + url)
+            event.preventDefault()
+            shell.openExternal(url)
+        }
+    )
+
+    menu.setApplicationMenu(gui.application_menu(mainWindow))
 })
 
 app.on('will-quit', function() {
