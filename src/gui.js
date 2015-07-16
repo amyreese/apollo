@@ -2,9 +2,10 @@ var app = require('app')
 var dialog = require('dialog')
 var menu = require('menu')
 
-/*
-Build the application menu for the current platform.
-*/
+/**
+ * Build the application menu for the current platform.
+ * @param BrowserWindow main window
+ */
 exports.application_menu = function(window) {
   var file = {
     label: 'File',
