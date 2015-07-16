@@ -6,35 +6,43 @@ var menu = require('menu')
 Build the application menu for the current platform.
 */
 exports.application_menu = function(window) {
-    var template = [
-        {
-            label: 'File',
-            submenu: [
-                {
-                    label: 'Quit',
-                    accelerator: 'CmdOrCtrl+Q',
-                    click: function() {
-                        app.quit()
-                    }
+    var file = {
+        label: 'File',
+        submenu: [
+            {
+                label: 'Quit',
+                accelerator: 'CmdOrCtrl+Q',
+                click: function() {
+                    app.quit()
                 }
-            ]
-        },
-        {
-            label: 'Help',
-            submenu: [
-                {
-                    label: 'About apollo',
-                    click: function() {
-                        dialog.showMessageBox(window, {
-                            title: 'About apollo',
-                            message: 'Apollo v' + app.getVersion(),
-                            buttons: ['ok'],
-                        })
-                    }
-                }
-            ]
-        }
-    ]
+            },
+        ]
+    }
 
-    return menu.buildFromTemplate(template)
+    var help = {
+        label: 'Help',
+        submenu: []
+    }
+
+    var about = {
+        label: 'About apollo',
+        click: function() {
+            dialog.showMessageBox(window, {
+                title: 'About apollo',
+                message: 'Apollo v' + app.getVersion(),
+                buttons: ['ok'],
+            })
+        }
+    }
+
+    if (process.platform == 'darwin') {
+        file.submenu.push(about)
+    } else {
+        help.submenu.push(about)
+    }
+
+    return menu.buildFromTemplate([
+        file,
+        help,
+    ])
 }
