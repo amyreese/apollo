@@ -1,6 +1,6 @@
 {
     "name": "apollo",
-    "version": "0.1",
+    "version": "0.1.0",
     "description": "elegant IRC client",
     "author": {
         "name": "John Reese",
@@ -17,5 +17,8 @@
     "main": "src/main.js",
     "scripts": {
         "test": "echo untestable"
+    },
+    "devDependencies": {
+        "electron-prebuilt": "0.29.x"
     }
 }
