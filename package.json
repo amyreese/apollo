@@ -21,7 +21,7 @@
   "scripts": {
     "test": "echo untestable"
   },
-  "devDependencies": {
+  "dependencies": {
     "electron-prebuilt": "0.29.x"
   }
 }
