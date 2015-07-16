@@ -11,7 +11,7 @@ var mainWindow = null
 
 app.on('ready', function() {
     mainWindow = new BrowserWindow({
-        title: "apollo",
+        title: "Apollo",
         icon: core.app_path('images/logosm.png'),
     })
     mainWindow.loadUrl(core.app_url('html/index.html'))

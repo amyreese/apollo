@@ -1,9 +1,9 @@
-apollo
+Apollo
 ======
 
 Elegant IRC client
 
-apollo (lowercase) is an IRC client focused on simplicity and elegance, while
+Apollo is an IRC client focused on simplicity and elegance, while
 retaining modern features habits.  The interface should be clean and clear of
 distracting bells and whistles, and conversations should be at the fore-front;
 show inline image previews and URL summaries rather than forcing the user to
@@ -14,7 +14,7 @@ configuration files should trump buttons and dialogs.
 
 Inspiration is being taken from Irssi, HipChat, Limechat, and Textual.
 
-apollo will be considered a success when the user can hide everything but the
+Apollo will be considered a success when the user can hide everything but the
 conversations themselves without losing any information.
 
 
@@ -37,4 +37,5 @@ To run the installed package:
 legal
 -----
 
-apollo is copyright 2015 John Reese, and licensed under the MIT license.  See LICENSE for details.
+Apollo is copyright 2015 John Reese, and licensed under the MIT license.
+See LICENSE for details.

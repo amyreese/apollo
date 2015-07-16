@@ -25,10 +25,10 @@ exports.application_menu = function(window) {
     }
 
     var about = {
-        label: 'About apollo',
+        label: 'About Apollo',
         click: function() {
             dialog.showMessageBox(window, {
-                title: 'About apollo',
+                title: 'About Apollo',
                 message: 'Apollo v' + app.getVersion(),
                 buttons: ['ok'],
             })
