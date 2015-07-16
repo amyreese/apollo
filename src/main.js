@@ -28,6 +28,8 @@ app.on('ready', function() {
         }
     )
 
+    core.app_protocol('apollo')
+
     menu.setApplicationMenu(gui.application_menu(mainWindow))
 })
 
