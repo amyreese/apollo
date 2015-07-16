@@ -1,7 +1,9 @@
+var app = require('app')
 var console = require('console')
 var path = require('path')
 
 var app_root = path.dirname(__dirname)
+var user_root = app.getPath('userData')
 
 /**
  * Given a path relative to the app root, return an absolute path to the resource.
@@ -9,6 +11,13 @@ var app_root = path.dirname(__dirname)
  */
 exports.app_path = function(p) {
   return path.join(app_root, p)
+}
+
+/**
+ * Given a path relative to the user's data root, return an absolute path.
+ */
+exports.user_path = function(p) {
+  return path.join(user_root, p)
 }
 
 /**

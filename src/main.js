@@ -6,6 +6,7 @@ var shell = require('shell')
 var BrowserWindow = require('browser-window')
 var globalShortcut = require('global-shortcut')
 
+var config = require('./config.js')
 var core = require('./core.js')
 var gui = require('./gui.js')
 
@@ -17,6 +18,8 @@ app.on('ready', function() {
   mainWindow = new BrowserWindow({
     title: "Apollo",
     icon: core.app_path('images/logosm.png'),
+    'accept-first-mouse': config.get('accept-first-mouse'),
+    'dark-theme': config.get('dark-theme'),
   })
 
   mainWindow.loadUrl('apollo://html/index.html')
