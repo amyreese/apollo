@@ -12,33 +12,33 @@ var gui = require('./gui.js')
 var mainWindow = null
 
 app.on('ready', function() {
-    mainWindow = new BrowserWindow({
-        title: "Apollo",
-        icon: core.app_path('images/logosm.png'),
-    })
-    mainWindow.loadUrl(core.app_url('html/index.html'))
-    mainWindow.on('closed', function() {
-        mainWindow = null
-    })
+  mainWindow = new BrowserWindow({
+    title: "Apollo",
+    icon: core.app_path('images/logosm.png'),
+  })
+  mainWindow.loadUrl(core.app_url('html/index.html'))
+  mainWindow.on('closed', function() {
+    mainWindow = null
+  })
 
-    mainWindow.webContents.on('will-navigate', function(event, url) {
-            console.log('navigate to ' + url)
-            event.preventDefault()
-            shell.openExternal(url)
-        }
-    )
+  mainWindow.webContents.on('will-navigate', function(event, url) {
+    console.log('navigate to ' + url)
+    event.preventDefault()
+    shell.openExternal(url)
+  }
+)
 
-    core.app_protocol('apollo')
+core.app_protocol('apollo')
 
-    menu.setApplicationMenu(gui.application_menu(mainWindow))
+menu.setApplicationMenu(gui.application_menu(mainWindow))
 })
 
 app.on('will-quit', function() {
-    globalShortcut.unregisterAll()
+  globalShortcut.unregisterAll()
 })
 
 app.on('window-all-closed', function() {
-    if (process.platform != 'darwin') {
-        app.quit()
-    }
+  if (process.platform != 'darwin') {
+    app.quit()
+  }
 })

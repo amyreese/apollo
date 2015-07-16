@@ -1,27 +1,27 @@
 {
-    "name": "apollo",
-    "version": "0.1.0",
-    "description": "elegant IRC client",
-    "author": {
-        "name": "John Reese",
-        "email": "john@noswap.com",
-        "url": "https://noswap.com"
-    },
-    "homepage": "https://github.com/jreese/apollo",
-    "keywords": [
-        "irc"
-    ],
-    "license": "MIT",
-    "repository": "jreese/apollo",
-    "bugs": "https://github.com/jreese/apollo/issues",
-    "main": "src/main.js",
-    "bin": {
-        "apollo": "bin/apollo.js"
-    },
-    "scripts": {
-        "test": "echo untestable"
-    },
-    "devDependencies": {
-        "electron-prebuilt": "0.29.x"
-    }
+  "name": "apollo",
+  "version": "0.1.0",
+  "description": "elegant IRC client",
+  "author": {
+    "name": "John Reese",
+    "email": "john@noswap.com",
+    "url": "https://noswap.com"
+  },
+  "homepage": "https://github.com/jreese/apollo",
+  "keywords": [
+    "irc"
+  ],
+  "license": "MIT",
+  "repository": "jreese/apollo",
+  "bugs": "https://github.com/jreese/apollo/issues",
+  "main": "src/main.js",
+  "bin": {
+    "apollo": "bin/apollo.js"
+  },
+  "scripts": {
+    "test": "echo untestable"
+  },
+  "devDependencies": {
+    "electron-prebuilt": "0.29.x"
+  }
 }
