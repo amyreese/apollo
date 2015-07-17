@@ -11,8 +11,8 @@ coverage
 .grunt
 .lock-wscript
 
-build/Release
-node_modules
+build/
+node_modules/
 
 electron
 electron.app
