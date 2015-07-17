@@ -22,6 +22,8 @@
     "test": "echo untestable"
   },
   "dependencies": {
-    "electron-prebuilt": "0.29.x"
+    "electron-prebuilt": "0.29.x",
+    "react": "0.13.x",
+    "react-tools": "0.13.x"
   }
 }
