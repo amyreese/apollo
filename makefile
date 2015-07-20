@@ -1,17 +1,20 @@
 build: node_modules src/*
-	jsx src/ build/
+	babel src/ -d js/
 
 watch: node_modules
-	jsx --watch src/ build/
+	babel --watch src/ -d js/
 
 node_modules: package.json
 	npm install
 
-dev:
-	npm install -g react-tools
+dev: node_modules
+	npm install -g asar, babel
+
+package: node_modules
+	npm run-script package
 
 clean:
-	rm -rf build
+	rm -rf build js
 
 distclean:
-	rm -rf build node_modules
+	rm -rf build js node_modules tools

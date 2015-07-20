@@ -13,6 +13,7 @@ coverage
 
 build/
 node_modules/
+tools
 
 electron
 electron.app

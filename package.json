@@ -19,11 +19,16 @@
     "apollo": "bin/apollo.js"
   },
   "scripts": {
+    "package": "node scripts/package.js",
     "test": "echo untestable"
   },
   "dependencies": {
     "electron-prebuilt": "0.29.x",
-    "react": "0.13.x",
-    "react-tools": "0.13.x"
+    "react": "0.13.x"
+  },
+  "devDependencies": {
+    "asar": "0.7.x",
+    "babel": "5.6.x",
+    "wrench": "1.5.x"
   }
 }
