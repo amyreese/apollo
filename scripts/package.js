@@ -15,6 +15,7 @@ var app_id = 'com.noswap.apollo'
 var app_icon = 'images/logobig.png'
 var company = 'noswap.com'
 var copyright = 'Copyright ' + today.getFullYear() + ' ' + info.author.name
+var background = 'images/installer.png'
 
 var create_asar = true
 var ignore_list = [
@@ -27,15 +28,42 @@ var ignore_list = [
   'tools',
 ]
 
-var platforms = [
+var installers = {
+  'darwin': function(build_path) {
+    var appdmg = require('appdmg')
+    console.log('Building dmg')
+
+    var dmg = appdmg({
+      'basepath': build_path,
+      'target': app_name + '.dmg',
+      'specification': {
+        'title': app_name,
+        'icon': path.join(root, app_icon),
+        'background': path.join(root, background),
+        'icon-size': 128,
+        'contents': [
+          {x: 100, y: 100, type: 'link', path: '/Applications'}
+          {x: 300, y: 100, type: 'file', path: app_name + '.app'}
+        ],
+      }
+    })
+
+    dmg.on('error', function(error) {
+      console.error('Building dmg failed: ' + error)
+    })
+  }
+}
+
+var build_list = [
   process.platform == 'win32' ? 'win32' : 'darwin',
   'linux',
 ]
 
-platforms.forEach(function(platform, idx, all) {
+build_list.forEach(function(platform, idx, all) {
   var binary = platform == 'darwin' ? app_name : app_name.toLowerCase()
   var arch = 'x64'
   var ignore = '(' + ignore_list.join('|') + ')'
+  var build_root = path.join(root, 'build')
 
   var options = {
     'name': binary,
@@ -55,7 +83,7 @@ platforms.forEach(function(platform, idx, all) {
     },
     'ignore': ignore,
     'dir': root,
-    'out': path.join(root, 'build'),
+    'out': build_root,
     'version': info.devDependencies['electron-prebuilt'],
     'platform': platform,
     'arch': arch,
@@ -68,6 +96,11 @@ platforms.forEach(function(platform, idx, all) {
     if (error) {
       console.error(error)
       return
+    }
+
+    if (installers[platform]) {
+      var fn = installers[platform]
+      fn(path.join(build_root, binary + '-' + platform + '-' + arch))
     }
   })
 })
