@@ -6,6 +6,7 @@ var path = require('path')
 require('./build.js')
 
 var root = path.dirname(__dirname)
+var build_root = path.join(root, 'build')
 var info = JSON.parse(fs.readFileSync(path.join(root, 'package.json')))
 var today = new Date();
 
@@ -15,7 +16,7 @@ var app_id = 'com.noswap.apollo'
 var app_icon = 'images/logobig.png'
 var company = 'noswap.com'
 var copyright = 'Copyright ' + today.getFullYear() + ' ' + info.author.name
-var background = 'images/installer.png'
+var background = 'images/dmg-background.png'
 
 var create_asar = true
 var ignore_list = [
@@ -35,14 +36,14 @@ var installers = {
 
     var dmg = appdmg({
       'basepath': build_path,
-      'target': app_name + '.dmg',
+      'target': path.join(build_root, app_name + '.dmg'),
       'specification': {
         'title': app_name,
         'icon': path.join(root, app_icon),
         'background': path.join(root, background),
         'icon-size': 128,
         'contents': [
-          {x: 100, y: 100, type: 'link', path: '/Applications'}
+          {x: 100, y: 100, type: 'link', path: '/Applications'},
           {x: 300, y: 100, type: 'file', path: app_name + '.app'}
         ],
       }
@@ -63,7 +64,6 @@ build_list.forEach(function(platform, idx, all) {
   var binary = platform == 'darwin' ? app_name : app_name.toLowerCase()
   var arch = 'x64'
   var ignore = '(' + ignore_list.join('|') + ')'
-  var build_root = path.join(root, 'build')
 
   var options = {
     'name': binary,
