@@ -14,21 +14,22 @@
   "license": "MIT",
   "repository": "jreese/apollo",
   "bugs": "https://github.com/jreese/apollo/issues",
-  "main": "src/main.js",
+  "main": "js/main.js",
   "bin": {
     "apollo": "bin/apollo.js"
   },
   "scripts": {
+    "build": "node scripts/build.js",
     "package": "node scripts/package.js",
     "test": "echo untestable"
   },
   "dependencies": {
-    "electron-prebuilt": "0.29.x",
     "react": "0.13.x"
   },
   "devDependencies": {
-    "asar": "0.7.x",
     "babel": "5.6.x",
+    "electron-packager": "^5.0.1",
+    "electron-prebuilt": "0.30.0",
     "wrench": "1.5.x"
   }
 }

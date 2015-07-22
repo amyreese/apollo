@@ -12,8 +12,9 @@ coverage
 .lock-wscript
 
 build/
+js/
 node_modules/
-tools
+tools/
 
 electron
 electron.app
