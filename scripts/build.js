@@ -13,7 +13,7 @@ function buildjs() {
   var files = wrench.readdirSyncRecursive(source)
   for (var f in files) {
     var file = files[f]
-    console.log(file)
+    console.log('processing ' + file)
 
     var result = babel.transformFileSync(path.join(source, file))
     fs.writeFileSync(path.join(target, file), result.code)

@@ -16,12 +16,26 @@ var app_icon = 'images/logobig.png'
 var company = 'noswap.com'
 var copyright = 'Copyright ' + today.getFullYear() + ' ' + info.author.name
 
-var binary = process.platform == 'darwin' ? app_name : app_name.toLowerCase()
-var ignore = '(.git|bin|build|makefile|scripts|src|tools)'
+var create_asar = true
+var ignore_list = [
+  '.git',
+  '.travis',
+  'bin',
+  'build',
+  'makefile',
+  'scripts',
+  'tools',
+]
 
-function package() {
-  var platform = process.platform == 'win32' ? 'win32,linux' : 'darwin,linux'
+var platforms = [
+  process.platform == 'win32' ? 'win32' : 'darwin',
+  'linux',
+]
+
+platforms.forEach(function(platform, idx, all) {
+  var binary = platform == 'darwin' ? app_name : app_name.toLowerCase()
   var arch = 'x64'
+  var ignore = '(' + ignore_list.join('|') + ')'
 
   var options = {
     'name': binary,
@@ -45,6 +59,7 @@ function package() {
     'version': info.devDependencies['electron-prebuilt'],
     'platform': platform,
     'arch': arch,
+    'asar': create_asar,
     'prune': true,
     'overwrite': true,
   }
@@ -52,10 +67,7 @@ function package() {
   packager(options, function(error, app_path) {
     if (error) {
       console.error(error)
-    } else {
-      console.log('done')
+      return
     }
   })
-}
-
-package()
+})
