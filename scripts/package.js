@@ -3,6 +3,7 @@ var fs = require('fs')
 var packager = require('electron-packager')
 var path = require('path')
 
+var tools = require('./tools.js')
 require('./build.js')
 
 var root = path.dirname(__dirname)
@@ -53,15 +54,10 @@ var installers = {
     dmg.on('error', function(error) {
       console.error('Building dmg failed: ' + error)
     })
-  }
+  },
 }
 
-var build_list = [process.platform]
-if (process.platform != 'linux') {
-  build_list.push('linux')
-}
-
-build_list.forEach(function(platform, idx, all) {
+function create_package(platform) {
   var binary = app_name
   var arch = 'x64'
   var ignore = '(' + ignore_list.join('|') + ')'
@@ -110,4 +106,8 @@ build_list.forEach(function(platform, idx, all) {
       fn(path.join(build_root, binary + '-' + platform + '-' + arch))
     }
   })
+}
+
+tools.install(function() {
+  create_package(process.platform)
 })

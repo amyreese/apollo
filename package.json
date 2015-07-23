@@ -41,6 +41,7 @@
     "babel": "5.6.x",
     "electron-packager": "^5.0.1",
     "electron-prebuilt": "0.30.0",
+    "unzip": "0.1.x",
     "wrench": "1.5.x"
   },
   "optionalDependencies": {

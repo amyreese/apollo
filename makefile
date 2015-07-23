@@ -10,5 +10,5 @@ package: clean node_modules
 clean:
 	rm -rf build js
 
-distclean:
-	rm -rf build js node_modules
+distclean: clean
+	rm -rf node_modules tools
