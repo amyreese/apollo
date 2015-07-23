@@ -4,7 +4,7 @@ build: node_modules src/*
 node_modules: package.json
 	npm install
 
-package: node_modules
+package: clean node_modules
 	npm run-script package
 
 clean:

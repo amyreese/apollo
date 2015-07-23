@@ -31,20 +31,21 @@ var ignore_list = [
 
 var installers = {
   'darwin': function(build_path) {
-    var appdmg = require('appdmg')
     console.log('Building dmg')
+    var appdmg = require('appdmg')
+    var dmg_name = app_name + '-v' + info.version + '.dmg'
 
     var dmg = appdmg({
       'basepath': build_path,
-      'target': path.join(build_root, app_name + '.dmg'),
+      'target': path.join(build_root, dmg_name),
       'specification': {
-        'title': app_name,
+        'title': app_name + ' v' + info.version,
         'icon': path.join(root, app_icon),
         'background': path.join(root, background),
         'icon-size': 128,
         'contents': [
-          {x: 100, y: 100, type: 'link', path: '/Applications'},
-          {x: 300, y: 100, type: 'file', path: app_name + '.app'}
+          {x: 260, y: 280, type: 'file', path: app_name + '.app'},
+          {x: 540, y: 280, type: 'link', path: '/Applications'},
         ],
       }
     })
@@ -55,15 +56,21 @@ var installers = {
   }
 }
 
-var build_list = [
-  process.platform == 'win32' ? 'win32' : 'darwin',
-  'linux',
-]
+var build_list = [process.platform]
+if (process.platform != 'linux') {
+  build_list.push('linux')
+}
 
 build_list.forEach(function(platform, idx, all) {
-  var binary = platform == 'darwin' ? app_name : app_name.toLowerCase()
+  var binary = app_name
   var arch = 'x64'
   var ignore = '(' + ignore_list.join('|') + ')'
+
+  if (platform == 'darwin') {
+    app_icon = 'build/' + app_name + '.icns'
+  } else {
+    binary = binary.toLowerCase()
+  }
 
   var options = {
     'name': binary,
