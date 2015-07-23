@@ -1,11 +1,22 @@
 {
   "name": "Apollo",
+  "app_id": "com.noswap.apollo",
   "version": "0.1.0",
   "description": "elegant IRC client",
   "author": {
     "name": "John Reese",
     "email": "john@noswap.com",
     "url": "https://noswap.com"
+  },
+  "company": "noswap.com",
+  "copyright": "Copyright 2015 John Reese",
+  "icons": {
+    "default": "images/logobig.png",
+    "icon_256x256.png": "images/logobig.png",
+    "icon_128x128@2x.png": "images./logobig.png"
+  },
+  "installer": {
+    "background": "images/dmg-background.png"
   },
   "homepage": "https://github.com/jreese/apollo",
   "keywords": [

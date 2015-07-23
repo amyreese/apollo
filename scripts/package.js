@@ -12,11 +12,11 @@ var today = new Date();
 
 var app_name = info.name
 var app_version = info.version
-var app_id = 'com.noswap.apollo'
-var app_icon = 'images/logobig.png'
-var company = 'noswap.com'
-var copyright = 'Copyright ' + today.getFullYear() + ' ' + info.author.name
-var background = 'images/dmg-background.png'
+var app_id = info.app_id
+var app_icon = info.icons.default
+var company = info.company
+var copyright = info.copyright
+var background = info.installer.background
 
 var create_asar = true
 var ignore_list = [

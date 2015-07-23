@@ -9,10 +9,7 @@ var build_root = path.join(root, 'build')
 var info = JSON.parse(fs.readFileSync(path.join(root, 'package.json')))
 
 var app_name = info.name
-var icon_sources = {
-  'icon_256x256.png': 'images/logobig.png',
-  'icon_128x128@2x.png': 'images/logobig.png',
-}
+var icon_sources = info.icons
 
 var build = {
   js: function() {
