@@ -5,10 +5,12 @@ var path = require('path')
 module.exports = function(grunt) {
   var pkg = grunt.file.readJSON('package.json')
   var build_path = 'build'
+  var build_name = pkg.name + '-' + process.platform + '-x64'
 
   grunt.initConfig({
     pkg: pkg,
     build_path: build_path,
+    build_name: build_name,
 
     babel: {
       js: {
@@ -62,6 +64,15 @@ module.exports = function(grunt) {
           icon: pkg.icons.default,
           background: pkg.installer.background,
         },
+      }
+    },
+
+    'create-windows-installer': {
+      options: {
+        appDirectory: path.join(build_path, build_name),
+        outputDirectory: build_path,
+        exe: pkg.name.toLowerCase() + '.exe',
+        setupIcon: pkg.icons.default,
       }
     },
   })

@@ -1,4 +1,3 @@
-var console = require('console')
 var fs = require('fs')
 var packager = require('electron-packager')
 var path = require('path')

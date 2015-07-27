@@ -2,13 +2,13 @@ module.exports = function(grunt) {
   grunt.registerTask('installer', function() {
     var options = this.options()
     var build_path = grunt.config('build_path')
-    var build_name = options.app_name + '-' + process.platform + '-x64'
+    var build_name = grunt.config('build_name')
 
     if (process.platform == 'darwin') {
+      grunt.log.writeln('Building dmg')
       var appdmg = require('appdmg')
 
       var done = this.async()
-
       var dmg = appdmg({
         'basepath': path.join(build_path, build_name),
         'target': path.join(build_path, options.dmg.name),
@@ -33,6 +33,9 @@ module.exports = function(grunt) {
       })
 
     } else if (process.platform == 'win32') {
+      grunt.log.writeln('Building windows installer')
+      grunt.loadNpmTasks('grunt-electron-installer')
+      grunt.task.run('create-windows-installer')
 
     } else if (process.platform == 'linux') {
 
