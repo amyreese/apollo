@@ -24,11 +24,13 @@ module.exports = function(grunt) {
       fs.writeFileSync(target, fs.readFileSync(source))
     }
 
-    grunt.log.writeln('Building ' + options.target)
-    spawn('iconutil', [
+    var argv = [
       '-c', 'icns',
-      '--output', target,
+      '--output', options.target,
       build_dir
-    ])
+    ]
+
+    grunt.log.writeln('iconutil ' + argv.join(' '))
+    return spawn('iconutil', argv)
   })
 }

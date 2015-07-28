@@ -12,10 +12,8 @@ module.exports = function(grunt) {
     var ignore = '(' + options.ignore_files.join('|') + ')'
 
     if (platform == 'darwin') {
-      options.app_icon = path.join(
-        build_path,
-        grunt.config('iconset.options.target')
-      )
+      options.app_icon = grunt.config('iconset.options.target')
+      grunt.log.writeln('Using ' + options.app_icon)
     } else {
       options.binary = options.binary.toLowerCase()
     }

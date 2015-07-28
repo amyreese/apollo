@@ -1,3 +1,5 @@
+var path = require('path')
+
 module.exports = function(grunt) {
   grunt.registerTask('installer', function() {
     var options = this.options()
@@ -5,17 +7,17 @@ module.exports = function(grunt) {
     var build_name = grunt.config('build_name')
 
     if (process.platform == 'darwin') {
-      grunt.log.writeln('Building dmg')
       var appdmg = require('appdmg')
+      grunt.log.writeln('Building dmg')
 
       var done = this.async()
       var dmg = appdmg({
         'basepath': path.join(build_path, build_name),
-        'target': path.join(build_path, options.dmg.name),
+        'target': path.join(build_path, options.dmg.filename),
         'specification': {
           'title': options.dmg.title,
-          'icon': grunt.resolve(options.dmg.icon),
-          'background': grunt.resolve(options.dmg.background),
+          'icon': path.resolve(options.dmg.icon),
+          'background': path.resolve(options.dmg.background),
           'icon-size': 128,
           'contents': [
             {x: 260, y: 280, type: 'file', path: options.app_name + '.app'},
@@ -23,6 +25,7 @@ module.exports = function(grunt) {
           ],
         }
       })
+      grunt.log.writeln(dmg)
 
       dmg.on('error', function(error) {
         done(error)
