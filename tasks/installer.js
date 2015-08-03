@@ -25,7 +25,6 @@ module.exports = function(grunt) {
           ],
         }
       })
-      grunt.log.writeln(dmg)
 
       dmg.on('error', function(error) {
         done(error)
