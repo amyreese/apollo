@@ -5,6 +5,7 @@ var menu = require('menu')
 var shell = require('shell')
 var BrowserWindow = require('browser-window')
 var globalShortcut = require('global-shortcut')
+var notifier = require('node-notifier')
 
 var config = require('./config.js')
 var core = require('./core.js')
@@ -37,6 +38,17 @@ app.on('ready', function() {
   })
 
   menu.setApplicationMenu(gui.application_menu(mainWindow))
+
+  notifier.notify({
+    title: 'Hello',
+    message: 'Welcome to Apollo',
+    icon: core.app_path('images/logomd.png'),
+    sound: true,
+  }, function(error, response) {
+    if (error) {
+      console.error(error)
+    }
+  })
 })
 
 app.on('will-quit', function() {
