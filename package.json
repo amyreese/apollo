@@ -44,7 +44,6 @@
     "grunt": "0.4.x",
     "grunt-babel": "5.0.x",
     "grunt-electron-installer": "^0.37.0",
-    "unzip": "0.1.x",
     "wrench": "1.5.x"
   },
   "optionalDependencies": {
