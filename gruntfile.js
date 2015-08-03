@@ -68,11 +68,11 @@ module.exports = function(grunt) {
     },
 
     'create-windows-installer': {
-      options: {
+      x64: {
         appDirectory: path.join(build_path, build_name),
         outputDirectory: build_path,
         exe: pkg.name.toLowerCase() + '.exe',
-        setupIcon: pkg.icons.default,
+        setupIcon: pkg.icons.windows,
       }
     },
   })

@@ -11,6 +11,7 @@
   "company": "noswap.com",
   "icons": {
     "default": "images/logobig.png",
+    "windows": "images/logobig.ico",
     "icon_256x256.png": "images/logobig.png",
     "icon_128x128@2x.png": "images/logobig.png"
   },
@@ -42,6 +43,7 @@
     "electron-prebuilt": "0.30.1",
     "grunt": "0.4.x",
     "grunt-babel": "5.0.x",
+    "grunt-electron-installer": "^0.37.0",
     "unzip": "0.1.x",
     "wrench": "1.5.x"
   },
