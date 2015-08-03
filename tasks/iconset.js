@@ -15,7 +15,7 @@ module.exports = function(grunt) {
     wrench.mkdirSyncRecursive(build_dir)
 
     for (var icon in options.icons) {
-      if (icon == 'default') {continue}
+      if (icon.indexOf('icon') != 0) {continue}
 
       var source = options.icons[icon]
       var target = path.join(build_dir, icon)
