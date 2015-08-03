@@ -72,7 +72,8 @@ module.exports = function(grunt) {
         appDirectory: path.join(build_path, build_name),
         outputDirectory: build_path,
         exe: pkg.name.toLowerCase() + '.exe',
-        setupIcon: pkg.icons.windows,
+        iconUrl: 'https://raw.githubusercontent.com/jreese/apollo/master/images/logobig.ico',
+        setupIcon: path.join(__dirname, pkg.icons.windows),
       }
     },
   })

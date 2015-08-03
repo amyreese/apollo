@@ -9,8 +9,11 @@ var globalShortcut = require('global-shortcut')
 var config = require('./config.js')
 var core = require('./core.js')
 var gui = require('./gui.js')
+var squirrel = require('./squirrel.js')
 
 var mainWindow = null
+
+squirrel.startup_event()
 
 app.on('ready', function() {
   core.app_protocol('apollo')
