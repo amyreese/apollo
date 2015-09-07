@@ -37,6 +37,11 @@ app.on('ready', function() {
   })
 
   menu.setApplicationMenu(gui.application_menu(mainWindow))
+
+  if (config.get('debug')) {
+    console.log('debug mode enabled')
+    mainWindow.openDevTools()
+  }
 })
 
 app.on('will-quit', function() {

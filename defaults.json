@@ -1,4 +1,5 @@
 {
   "accept-first-mouse": true,
-  "dark-theme": true
+  "dark-theme": true,
+  "debug": false
 }
