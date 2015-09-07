@@ -6,4 +6,4 @@ var electron = require('electron-prebuilt')
 var app_root = path.dirname(__dirname)
 var args = [app_root].concat(process.argv.slice(2))
 
-spawn(electron, args)
+spawn(electron, args, {stdio: 'inherit'})
