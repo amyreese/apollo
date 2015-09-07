@@ -25,7 +25,7 @@
   "license": "MIT",
   "repository": "jreese/apollo",
   "bugs": "https://github.com/jreese/apollo/issues",
-  "main": "js/main.js",
+  "main": "src/main.js",
   "bin": {
     "apollo": "bin/apollo.js"
   },
