@@ -35,7 +35,6 @@
     "test": "echo untestable"
   },
   "dependencies": {
-    "node-notifier": "4.2.x",
     "react": "0.13.x"
   },
   "devDependencies": {
