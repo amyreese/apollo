@@ -37,12 +37,12 @@ exports.app_protocol = function(scheme) {
   var protocol = require('protocol')
   var chop = scheme.length + 3  // scheme + '://'
 
-  var handler = function(request) {
+  var handler = function(request, callback) {
     var url = request.url.substr(chop)
-    return new protocol.RequestFileJob(exports.app_path(url))
+    callback({path: exports.app_path(url)})
   }
 
-  protocol.registerProtocol(scheme, handler, function(error, scheme) {
+  protocol.registerFileProtocol(scheme, handler, function(error) {
     if (error) {
       console.error('failed to register protocol ' + scheme)
     }
